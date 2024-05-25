@@ -13,9 +13,13 @@ Using logger in a singleton
 
 ### Adapter
 
-Creating through factory
+ In this example, the LoggerAdapter<T> class adapt the IAppLogger<T> of the logger nuget external package.
+ and from InfrastructureServicesRegistration class through ConfigureInfrastructureServices static method register the service.
+ 
+ Creating through factory
 ![image](https://github.com/rescatado182/HRLeaveManagement.Clean/assets/3597508/b8b4df94-fdf3-4fe2-a87f-072936f88232)
 
-Usgin Interface
+
+ This allows the application using the logger instance on Application layer facilitating easy integration with minimal code. 
 ![image](https://github.com/rescatado182/HRLeaveManagement.Clean/assets/3597508/6be4a7ae-f306-47b7-8a56-644c907e827e)
 
