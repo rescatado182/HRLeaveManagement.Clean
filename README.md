@@ -4,7 +4,7 @@
 
 ### Singleton
 
-Using logger in a singleton
+Setting logger instance into the static services
 ![image](https://github.com/rescatado182/HRLeaveManagement.Clean/assets/3597508/c80ec5a9-08e6-4a1e-9f9d-482729d47e5c)
 
 Using logger in a singleton
