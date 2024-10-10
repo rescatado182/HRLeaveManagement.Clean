@@ -18,7 +18,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllocations.Queries.GetLe
         public async Task<List<LeaveAllocationDto>> Handle(GetLeaveAllocationListRequest request, CancellationToken cancellationToken)
         {
             // Todo
-            // - Get records for specific user
+            // - Get records for specific uvser
             // - Get Allocations per employee
 
             var leaveAllocations = await _leaveAllocationRepository.GetLeaveAllocationsWithDetails();

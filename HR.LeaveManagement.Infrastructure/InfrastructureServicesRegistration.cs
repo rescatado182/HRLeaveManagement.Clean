@@ -1,6 +1,6 @@
 ﻿using HR.LeaveManagement.Application.Contracts.Infrastructure;
 using HR.LeaveManagement.Application.Contracts.Logging;
-using HR.LeaveManagement.Application.Models;
+using HR.LeaveManagement.Application.Models.Email;
 using HR.LeaveManagement.Infrastructure.Logging;
 using HR.LeaveManagement.Infrastructure.Mail;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ namespace HR.LeaveManagement.Infrastructure
 {
     public static class InfrastructureServicesRegistration
     {
-        public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services, 
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, 
             IConfiguration configurations)
         {
             services.Configure<EmailSettings>(configurations.GetSection("EmailSettings"));

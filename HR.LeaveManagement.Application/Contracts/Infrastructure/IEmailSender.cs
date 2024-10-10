@@ -1,4 +1,4 @@
-﻿using HR.LeaveManagement.Application.Models;
+﻿using HR.LeaveManagement.Application.Models.Email;
 
 namespace HR.LeaveManagement.Application.Contracts.Infrastructure
 {

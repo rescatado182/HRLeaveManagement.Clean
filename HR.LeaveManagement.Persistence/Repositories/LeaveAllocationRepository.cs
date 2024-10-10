@@ -7,8 +7,8 @@ namespace HR.LeaveManagement.Persistence.Repositories
 {
     public class LeaveAllocationRepository : GenericRepository<LeaveAllocation>, ILeaveAllocationRepository
     {
-        private readonly LeaveManagementDbContext _dbContext;
-        public LeaveAllocationRepository(LeaveManagementDbContext dbContext) : base(dbContext)
+        private readonly HrDatabaseContext _dbContext;
+        public LeaveAllocationRepository(HrDatabaseContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

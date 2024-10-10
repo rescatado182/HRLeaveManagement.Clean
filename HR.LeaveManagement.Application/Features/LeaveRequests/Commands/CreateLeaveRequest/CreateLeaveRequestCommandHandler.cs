@@ -3,7 +3,7 @@ using HR.LeaveManagement.Application.Contracts.Infrastructure;
 using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
-using HR.LeaveManagement.Application.Models;
+using HR.LeaveManagement.Application.Models.Email;
 using HR.LeaveManagement.Domain;
 using MediatR;
 
@@ -30,10 +30,9 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequests.Commands.CreateL
         public async Task<Unit> Handle(CreateLeaveRequestCommand request, CancellationToken cancellationToken)
         {
             var validator = new CreateLeaveRequestDtoValidator(_leaveTypeRepository);
-            var validationResult = await validator.ValidateAsync(request.LeaveRequestDto);
+            var validationResult = await validator.ValidateAsync(request.LeaveRequestDto, cancellationToken);
 
-            if (validationResult.Errors.Any())
-            {
+            if (validationResult.Errors.Count != 0) {
                 throw new BadRequestException("Invalid Leave Request", validationResult);
             }
 

@@ -4,30 +4,23 @@ using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveAllocations.Commands.UpdateLeaveAllocation;
-using HR.LeaveManagement.Application.Models;
+using HR.LeaveManagement.Application.Models.Email;
 using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequests.Commands.UpdateLeaveRequest
 {
-    public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
+    public class UpdateLeaveRequestCommandHandler(IMapper mapper, IEmailSender emailSender,
+        IAppLogger<UpdateLeaveAllocationCommandHandler> appLogger,
+        ILeaveRequestRepository leaveRequestRepository, ILeaveTypeRepository leaveTypeRepository) 
+        : IRequestHandler<UpdateLeaveRequestCommand, Unit>
     {
-        private readonly ILeaveRequestRepository _leaveRequestRepository;
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
+        private readonly ILeaveRequestRepository _leaveRequestRepository = leaveRequestRepository;
+        private readonly ILeaveTypeRepository _leaveTypeRepository = leaveTypeRepository;
 
-        private readonly IMapper _mapper;
-        private readonly IEmailSender _emailSender;
-        private readonly IAppLogger<UpdateLeaveAllocationCommandHandler> _appLogger;
+        private readonly IMapper _mapper = mapper;
+        private readonly IEmailSender _emailSender = emailSender;
+        private readonly IAppLogger<UpdateLeaveAllocationCommandHandler> _appLogger = appLogger;
 
-        public UpdateLeaveRequestCommandHandler(IMapper mapper, IEmailSender emailSender,
-            IAppLogger<UpdateLeaveAllocationCommandHandler> appLogger,
-            ILeaveRequestRepository leaveRequestRepository, ILeaveTypeRepository leaveTypeRepository)
-        {
-            _leaveRequestRepository = leaveRequestRepository;
-            _leaveTypeRepository = leaveTypeRepository;
-            _mapper = mapper;
-            _emailSender = emailSender;
-            _appLogger = appLogger;
-        }
         public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
         {
             var leaveRequest = await _leaveRequestRepository.GetByIdAsync(request.Id);
@@ -37,7 +30,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequests.Commands.UpdateL
             }
 
             var validator = new UpdateLeaveRequestDtoValidator(_leaveTypeRepository, _leaveRequestRepository);
-            var validationResult = await validator.ValidateAsync(request.LeaveRequestDto);
+            var validationResult = await validator.ValidateAsync(request.LeaveRequestDto, cancellationToken);
 
             if (validationResult.IsValid == false)
             {

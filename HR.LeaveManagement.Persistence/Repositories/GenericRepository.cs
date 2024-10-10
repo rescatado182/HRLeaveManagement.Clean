@@ -7,8 +7,8 @@ namespace HR.LeaveManagement.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEntity
     {
-        protected readonly LeaveManagementDbContext _context;
-        public GenericRepository(LeaveManagementDbContext context)
+        protected readonly HrDatabaseContext _context;
+        public GenericRepository(HrDatabaseContext context)
         {
            _context = context;
             

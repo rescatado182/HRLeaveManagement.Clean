@@ -10,15 +10,16 @@ namespace HR.LeaveManagement.Application.Features.LeaveTypes.Queries.GetAllLeave
     {
         private readonly ILeaveTypeRepository _leaveTypeRepository;
         private readonly IMapper _mapper;
-        private readonly IAppLogger<GetLeaveTypeListRequest> _logger;
+        private readonly IAppLogger<GetLeaveTypeListRequestHandler> _logger;
 
         public GetLeaveTypeListRequestHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper,
-            IAppLogger<GetLeaveTypeListRequest> logger)
+            IAppLogger<GetLeaveTypeListRequestHandler> logger)
         {
             _leaveTypeRepository = leaveTypeRepository;
             _mapper = mapper;
             _logger = logger;
         }
+        
 
         public async Task<List<LeaveTypeDto>> Handle(GetLeaveTypeListRequest request, CancellationToken cancellationToken)
         {

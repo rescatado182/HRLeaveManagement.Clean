@@ -7,8 +7,8 @@ namespace HR.LeaveManagement.Persistence.Repositories
 {
     public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveRequestRepository
     {
-        private readonly LeaveManagementDbContext _dbContext;
-        public LeaveRequestRepository(LeaveManagementDbContext dbContext) : base(dbContext)
+        private readonly HrDatabaseContext _dbContext;
+        public LeaveRequestRepository(HrDatabaseContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
@@ -46,7 +46,6 @@ namespace HR.LeaveManagement.Persistence.Repositories
             _dbContext.Entry(leaveRequest).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
-
         
     }
 }

@@ -1,20 +1,15 @@
 ﻿using HR.LeaveManagement.Application.Contracts.Infrastructure;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Application.Exceptions;
-using HR.LeaveManagement.Application.Models;
+using HR.LeaveManagement.Application.Models.Email;
 using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequests.Commands.CancelLeaveRequest
 {
-    public class CancelLeaveRequestCommandHandler : IRequestHandler<CancelLeaveRequestCommand, Unit>
+    public class CancelLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository, IEmailSender emailSender) : IRequestHandler<CancelLeaveRequestCommand, Unit>
     {
-        private readonly ILeaveRequestRepository _leaveRequestRepository;
-        private readonly IEmailSender _emailSender;
-        public CancelLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository, IEmailSender emailSender)
-        {
-            _leaveRequestRepository = leaveRequestRepository;
-            _emailSender = emailSender;
-        }
+        private readonly ILeaveRequestRepository _leaveRequestRepository = leaveRequestRepository;
+        private readonly IEmailSender _emailSender = emailSender;
 
         public async Task<Unit> Handle(CancelLeaveRequestCommand request, CancellationToken cancellationToken)
         {

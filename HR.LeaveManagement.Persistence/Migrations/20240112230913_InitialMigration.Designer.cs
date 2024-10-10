@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HR.LeaveManagement.Persistence.Migrations
 {
-    [DbContext(typeof(LeaveManagementDbContext))]
+    [DbContext(typeof(HrDatabaseContext))]
     [Migration("20240112230913_InitialMigration")]
     partial class InitialMigration
     {

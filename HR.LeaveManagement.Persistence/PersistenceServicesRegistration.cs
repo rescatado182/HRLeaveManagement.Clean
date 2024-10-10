@@ -9,10 +9,10 @@ namespace HR.LeaveManagement.Persistence
 {
     public static class PersistenceServicesRegistration
     {
-        public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services, 
+        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, 
             IConfiguration configuration) 
         {
-            services.AddDbContext<LeaveManagementDbContext>(options =>
+            services.AddDbContext<HrDatabaseContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("HRLeaveManagementConnectionString")
                 )
